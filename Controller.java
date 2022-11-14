@@ -69,43 +69,40 @@ public class Controller implements Initializable {
     }
 
 
-
-
-
-    public synchronized void action(){
+    public synchronized void action() {
         Runnable r = () -> {
 
-            while (true){
+            while (true) {
 
                 try {
                     String rev = dataInputStream.readUTF();
-                    System.out.println(rev+" from server");
-                    int x,y;
-                    if (rev.contains("you play first")){
+                    System.out.println(rev + " from server");
+                    int x, y;
+                    if (rev.contains("you play first")) {
                         Platform.runLater(() -> {
                             game_panel.setVisible(true);
                         });
                     }
-                    if (rev.matches("[0-9 ]+")){
+                    if (rev.matches("[0-9 ]+")) {
                         x = Integer.parseInt(rev.split(" ")[0]);
                         y = Integer.parseInt(rev.split(" ")[1]);
-                        System.out.println(x+" "+y);
+                        System.out.println(x + " " + y);
                         chessBoard[x][y] = TURN ? PLAY_1 : PLAY_2;
                         TURN = !TURN;
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
-                                    drawChess();
-                                    game_panel.setVisible(true);
-                                    try {
-                                        Thread.sleep(100);
-                                    } catch (InterruptedException e) {
-                                        throw new RuntimeException(e);
-                                    }
+                                drawChess();
+                                game_panel.setVisible(true);
+                                try {
+                                    Thread.sleep(100);
+                                } catch (InterruptedException e) {
+                                    throw new RuntimeException(e);
                                 }
+                            }
                         });
                     }
-                    if (rev.contains("WIN")||rev.contains("LOSE")||rev.contains("TIE")){
+                    if (rev.contains("WIN") || rev.contains("LOSE") || rev.contains("TIE")) {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
@@ -115,12 +112,10 @@ public class Controller implements Initializable {
 
                     }
 
-                }
-
-                catch (Exception e){
+                } catch (Exception e) {
                     //e.printStackTrace();
                     //Thread.currentThread().interrupt();
-                    boolean servercrash=false;
+                    boolean servercrash = false;
                     try {
                         s.sendUrgentData(0);
                     } catch (Exception ex) {
@@ -142,8 +137,7 @@ public class Controller implements Initializable {
                     try {
                         Thread.sleep(5000);
                         System.exit(0);
-                    }
-                    catch (Exception ex){
+                    } catch (Exception ex) {
                         ex.printStackTrace();
                     }
 
@@ -154,16 +148,15 @@ public class Controller implements Initializable {
         new Thread(r).start();
     }
 
-    private boolean refreshBoard (int x, int y) {
+    private boolean refreshBoard(int x, int y) {
         if (chessBoard[x][y] == EMPTY) {
             chessBoard[x][y] = TURN ? PLAY_1 : PLAY_2;
 
-            String s1 = x+" "+y+" "+s.getPort();
+            String s1 = x + " " + y + " " + s.getPort();
             try {
                 dataoutputStream.writeUTF(s1);
                 dataoutputStream.flush();
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
 
@@ -173,7 +166,7 @@ public class Controller implements Initializable {
         return false;
     }
 
-    private void drawChess () {
+    private void drawChess() {
         for (int i = 0; i < chessBoard.length; i++) {
             for (int j = 0; j < chessBoard[0].length; j++) {
                 if (flag[i][j]) {
@@ -197,7 +190,7 @@ public class Controller implements Initializable {
         }
     }
 
-    private void drawCircle (int i, int j) {
+    private void drawCircle(int i, int j) {
         Circle circle = new Circle();
         base_square.getChildren().add(circle);
         circle.setCenterX(i * BOUND + BOUND / 2.0 + OFFSET);
@@ -208,7 +201,7 @@ public class Controller implements Initializable {
         flag[i][j] = true;
     }
 
-    private void drawLine (int i, int j) {
+    private void drawLine(int i, int j) {
         Line line_a = new Line();
         Line line_b = new Line();
         base_square.getChildren().add(line_a);

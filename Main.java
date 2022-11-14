@@ -25,7 +25,6 @@ public class Main extends Application {
             primaryStage.show();
 
 
-
             //primaryStage.close();
 
         } catch (Exception e) {
