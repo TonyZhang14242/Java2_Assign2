@@ -1,6 +1,6 @@
-# Assignment 2 Tic-tac-toe Game
+# Assignment 2 Tic-tac-toe Game (100 Points)
 
-This is a template for CS209A-22fall, assignment 2.
+This is CS209A-22fall, assignment 2.
 
 ## How to start?
 
@@ -26,18 +26,16 @@ The java version for reference. If you want to use another java language level, 
 
 ## Demo View
 
-This is a demo view for the assignment. However, the basic functions are not complete yet. You should do it by yourself!
+This is a demo view for the assignment. Please **DO NOT** copy directly. It's only for a reference.
 
 ![image-20220930144914104](README.assets/image-20220930144914104.png)
 
-## TODO
+## Tasks
 
-- [ ] Server (35pt.)
-- [ ] Client/Player (35pt.)
+- [x] Server (35pt.)
+- [x] Client/Player (35pt.)
 - [x] GUI (15pt.)
-- [ ] Exception Handling (15pt.)
+- [x] Exception Handling (15pt.)
 - [ ] Bonus (15pt.)
 
-## Hint
 
-You need to first decouple the view and controller, divide the controller into two components: **client** and **server**, and then use **socket** to communicate between the two components to complete the basic functions.
